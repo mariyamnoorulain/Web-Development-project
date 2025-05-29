@@ -9,7 +9,7 @@ import SuccessStories from './pages/SuccessStories';
 import Jobs from './pages/Jobs';
 import Membership from './pages/Membership';
 import Contact from './pages/Contact';
-import PremiumFeatures from './pages/PremiumFeatures';
+import ConnectingWithAlumni from './pages/ConnectingWithAlumni';
 import { RegistrationModal } from './components/RegistrationModal';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
           <Route path="/success-stories" element={<SuccessStories />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/membership" element={<Membership onRegister={() => setIsRegistrationOpen(true)} />} />
-          <Route path="/premium-features" element={<PremiumFeatures />} />
+          <Route path="/connecting-with-alumni" element={<ConnectingWithAlumni />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>

@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ onRegister }) => {
             <Link to="/success-stories" className="px-3 py-2 hover:text-yellow-400 transition-colors">Success Stories</Link>
             <Link to="/jobs" className="px-3 py-2 hover:text-yellow-400 transition-colors">Jobs</Link>
             <Link to="/membership" className="px-3 py-2 hover:text-yellow-400 transition-colors">Membership</Link>
-            <Link to="/premium-features" className="px-3 py-2 hover:text-yellow-400 transition-colors">Premium Features</Link>
+            <Link to="/connecting-with-alumni" className="px-3 py-2 hover:text-yellow-400 transition-colors">Connect with Alumni</Link>
             <Link to="/contact" className="px-3 py-2 hover:text-yellow-400 transition-colors">Contact</Link>
             <button
               onClick={onRegister}
@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ onRegister }) => {
             <Link to="/success-stories" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Success Stories</Link>
             <Link to="/jobs" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Jobs</Link>
             <Link to="/membership" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Membership</Link>
-            <Link to="/premium-features" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Premium Features</Link>
+            <Link to="/connecting-with-alumni" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Connect with Alumni</Link>
             <Link to="/contact" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Contact</Link>
             <button
               onClick={() => {
