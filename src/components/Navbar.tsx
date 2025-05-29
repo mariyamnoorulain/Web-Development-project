@@ -20,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ onRegister }) => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <GraduationCap className="h-8 w-8 text-yellow-400" />
-              <span className="ml-2 text-xl font-bold">Namal Alumni</span>
+              <span className="ml-2 text-xl font-bold">NEXUS</span>
             </Link>
           </div>
           
@@ -30,7 +30,9 @@ const Navbar: React.FC<NavbarProps> = ({ onRegister }) => {
             <Link to="/about" className="px-3 py-2 hover:text-yellow-400 transition-colors">About</Link>
             <Link to="/events" className="px-3 py-2 hover:text-yellow-400 transition-colors">Events</Link>
             <Link to="/success-stories" className="px-3 py-2 hover:text-yellow-400 transition-colors">Success Stories</Link>
+            <Link to="/jobs" className="px-3 py-2 hover:text-yellow-400 transition-colors">Jobs</Link>
             <Link to="/membership" className="px-3 py-2 hover:text-yellow-400 transition-colors">Membership</Link>
+            <Link to="/premium-features" className="px-3 py-2 hover:text-yellow-400 transition-colors">Premium Features</Link>
             <Link to="/contact" className="px-3 py-2 hover:text-yellow-400 transition-colors">Contact</Link>
             <button
               onClick={onRegister}
@@ -57,7 +59,9 @@ const Navbar: React.FC<NavbarProps> = ({ onRegister }) => {
             <Link to="/about" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>About</Link>
             <Link to="/events" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Events</Link>
             <Link to="/success-stories" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Success Stories</Link>
+            <Link to="/jobs" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Jobs</Link>
             <Link to="/membership" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Membership</Link>
+            <Link to="/premium-features" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Premium Features</Link>
             <Link to="/contact" className="block px-3 py-2 hover:bg-green-700 hover:text-yellow-400 transition-colors" onClick={toggleMenu}>Contact</Link>
             <button
               onClick={() => {

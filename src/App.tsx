@@ -6,8 +6,10 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Events from './pages/Events';
 import SuccessStories from './pages/SuccessStories';
+import Jobs from './pages/Jobs';
 import Membership from './pages/Membership';
 import Contact from './pages/Contact';
+import PremiumFeatures from './pages/PremiumFeatures';
 import { RegistrationModal } from './components/RegistrationModal';
 
 function App() {
@@ -22,7 +24,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/events" element={<Events />} />
           <Route path="/success-stories" element={<SuccessStories />} />
+          <Route path="/jobs" element={<Jobs />} />
           <Route path="/membership" element={<Membership onRegister={() => setIsRegistrationOpen(true)} />} />
+          <Route path="/premium-features" element={<PremiumFeatures />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
