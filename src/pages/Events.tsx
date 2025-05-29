@@ -35,3 +35,5 @@ const upcomingEvents = [
     </div>
   </div>
 </section>
+
+export default upcomingEvents
