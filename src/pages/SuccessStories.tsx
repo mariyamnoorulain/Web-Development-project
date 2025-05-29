@@ -21,3 +21,5 @@ const [selectedStory, setSelectedStory] = useState<null | any>(null);
     onClose={() => setSelectedStory(null)}
   />
 )}
+
+export default selectedStory
