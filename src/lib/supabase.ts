@@ -3,11 +3,18 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+// Provide fallback values for development
+const defaultUrl = 'https://your-project.supabase.co';
+const defaultKey = 'your-anon-key';
+
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
+  console.warn('Supabase environment variables not found. Using fallback values for development.');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(
+  supabaseUrl || defaultUrl, 
+  supabaseAnonKey || defaultKey
+);
 
 // Helper function to register a new user
 export async function registerUser(userData: {
@@ -23,37 +30,22 @@ export async function registerUser(userData: {
   membershipType: string;
 }) {
   try {
-    // Sign up the user
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email: userData.email,
-      password: userData.password,
+    // For now, we'll use the Express backend instead of Supabase
+    const response = await fetch('http://localhost:5000/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(userData),
     });
 
-    if (authError) throw authError;
-
-    if (authData.user) {
-      // Create profile
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .insert([
-          {
-            id: authData.user.id,
-            first_name: userData.firstName,
-            last_name: userData.lastName,
-            email: userData.email,
-            phone: userData.phone,
-            graduation_year: userData.graduationYear,
-            degree_program: userData.degreeProgram,
-            current_position: userData.currentPosition,
-            current_location: userData.currentLocation,
-            membership_type: userData.membershipType,
-          },
-        ]);
-
-      if (profileError) throw profileError;
-
-      return { success: true, user: authData.user };
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Registration failed');
     }
+
+    return await response.json();
   } catch (error) {
     console.error('Error registering user:', error);
     throw error;
@@ -63,14 +55,16 @@ export async function registerUser(userData: {
 // Helper function to get user profile
 export async function getUserProfile(userId: string) {
   try {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', userId)
-      .single();
+    const response = await fetch(`http://localhost:5000/api/users/profile`, {
+      credentials: 'include',
+    });
 
-    if (error) throw error;
-    return data;
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to fetch profile');
+    }
+
+    return await response.json();
   } catch (error) {
     console.error('Error fetching user profile:', error);
     throw error;
@@ -86,20 +80,28 @@ export async function updateUserProfile(userId: string, updates: Partial<{
   current_location: string;
 }>) {
   try {
-    const { error } = await supabase
-      .from('profiles')
-      .update(updates)
-      .eq('id', userId);
+    const response = await fetch(`http://localhost:5000/api/users/profile`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(updates),
+    });
 
-    if (error) throw error;
-    return { success: true };
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to update profile');
+    }
+
+    return await response.json();
   } catch (error) {
     console.error('Error updating user profile:', error);
     throw error;
   }
 }
 
-// Helper function to submit event registration
+// Helper function to register for event
 export async function registerForEvent(eventData: {
   userId: string;
   eventId: string;
@@ -109,12 +111,21 @@ export async function registerForEvent(eventData: {
   requirements?: string;
 }) {
   try {
-    const { error } = await supabase
-      .from('event_registrations')
-      .insert([eventData]);
+    const response = await fetch('http://localhost:5000/api/events/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(eventData),
+    });
 
-    if (error) throw error;
-    return { success: true };
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Event registration failed');
+    }
+
+    return await response.json();
   } catch (error) {
     console.error('Error registering for event:', error);
     throw error;
@@ -133,12 +144,21 @@ export async function submitEventIdea(ideaData: {
   expectedAttendees: number;
 }) {
   try {
-    const { error } = await supabase
-      .from('event_ideas')
-      .insert([ideaData]);
+    const response = await fetch('http://localhost:5000/api/events/ideas', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(ideaData),
+    });
 
-    if (error) throw error;
-    return { success: true };
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to submit event idea');
+    }
+
+    return await response.json();
   } catch (error) {
     console.error('Error submitting event idea:', error);
     throw error;
